@@ -6,16 +6,20 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { __param } from 'tslib';
 import { SearchComponent } from "../../../components/partials/search/search.component";
+import { FoodTag } from '../../../shared/models/Foodtags';
+import { sample_tags } from '../../../../data';
+import { GoodtagsComponent } from "../../../components/partials/goodtags/goodtags.component";
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, RouterModule, CommonModule, RatingModule, FormsModule, SearchComponent],
+  imports: [NgFor, RouterModule, CommonModule, RatingModule, FormsModule, SearchComponent, GoodtagsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  sampleTags: FoodTag[] = sample_tags;
   foods: Food[] = [];
   value: number = 0;
 
@@ -23,6 +27,8 @@ export class HomeComponent {
     activatedRoute.params.subscribe((params) => {
       if (params['searchTerm'])
         this.foods = this.foodService.getAllFoodsBySearchTerm(params['searchTerm']);
+      else if (params['tag'])
+        this.foods = this.foodService.getAllFoodsByTag(params['tag']);
 
       else
         this.foods = foodService.getAll();
