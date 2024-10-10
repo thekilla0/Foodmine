@@ -7,10 +7,11 @@ import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from "../../partials/not-found/not-found.component";
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [TitleComponent, NgFor, RouterLink, CommonModule, FormsModule],
+  imports: [TitleComponent, NgFor, RouterLink, CommonModule, FormsModule, NotFoundComponent],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css',
 })

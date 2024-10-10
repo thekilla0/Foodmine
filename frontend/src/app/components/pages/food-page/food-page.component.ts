@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
+import { NotFoundComponent } from "../../partials/not-found/not-found.component";
 @Component({
   selector: 'app-food-page',
   standalone: true,
-  imports: [RatingModule, CommonModule, FormsModule, RouterLink],
+  imports: [RatingModule, CommonModule, FormsModule, RouterLink, NotFoundComponent],
   templateUrl: './food-page.component.html',
   styleUrl: './food-page.component.css',
 })

@@ -10,11 +10,12 @@ import { SearchComponent } from "../../../components/partials/search/search.comp
 import { FoodTag } from '../../../shared/models/Foodtags';
 import { sample_tags } from '../../../../data';
 import { GoodtagsComponent } from "../../../components/partials/goodtags/goodtags.component";
+import { NotFoundComponent } from "../../../components/partials/not-found/not-found.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, RouterModule, CommonModule, RatingModule, FormsModule, SearchComponent, GoodtagsComponent],
+  imports: [NgFor, RouterModule, CommonModule, RatingModule, FormsModule, SearchComponent, GoodtagsComponent, NotFoundComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
