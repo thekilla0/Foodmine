@@ -11,6 +11,7 @@ import { FoodTag } from '../../../shared/models/Foodtags';
 import { sample_tags } from '../../../../data';
 import { GoodtagsComponent } from "../../../components/partials/goodtags/goodtags.component";
 import { NotFoundComponent } from "../../../components/partials/not-found/not-found.component";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -25,14 +26,19 @@ export class HomeComponent {
   value: number = 0;
 
   constructor(private foodService: FoodService, activatedRoute: ActivatedRoute) {
+    let foodObservable: Observable<Food[]>;
     activatedRoute.params.subscribe((params) => {
       if (params['searchTerm'])
-        this.foods = this.foodService.getAllFoodsBySearchTerm(params['searchTerm']);
+        foodObservable = this.foodService.getAllFoodsBySearchTerm(params['searchTerm']);
       else if (params['tag'])
-        this.foods = this.foodService.getAllFoodsByTag(params['tag']);
+        foodObservable = this.foodService.getAllFoodsByTag(params['tag']);
 
       else
-        this.foods = foodService.getAll();
+        foodObservable = foodService.getAll();
+
+      foodObservable.subscribe((serverFoods) => {
+        this.foods = serverFoods;
+      })
     })
 
 

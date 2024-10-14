@@ -15,6 +15,8 @@ import { FoodTag } from '../../../shared/models/Foodtags';
 export class GoodtagsComponent {
   tags?: FoodTag[];
   constructor(foodService: FoodService) {
-    this.tags = foodService.getAllTags();
+    foodService.getAllTags().subscribe((serverTags) => {
+      this.tags = serverTags;
+    });
   }
 }

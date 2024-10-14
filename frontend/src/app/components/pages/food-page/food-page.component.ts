@@ -7,11 +7,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
-import { NotFoundComponent } from "../../partials/not-found/not-found.component";
+import { NotFoundComponent } from '../../partials/not-found/not-found.component';
 @Component({
   selector: 'app-food-page',
   standalone: true,
-  imports: [RatingModule, CommonModule, FormsModule, RouterLink, NotFoundComponent],
+  imports: [
+    RatingModule,
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    NotFoundComponent,
+  ],
   templateUrl: './food-page.component.html',
   styleUrl: './food-page.component.css',
 })
@@ -25,7 +31,10 @@ export class FoodPageComponent {
     private router: Router
   ) {
     activatedRoute.params.subscribe((params) => {
-      if (params['id']) this.food = foodservice.getFoodbyId(params['id']);
+      if (params['id'])
+        foodservice.getFoodbyId(params['id']).subscribe(serverFoods => {
+          this.food = serverFoods;
+      });
     });
   }
   addToCart() {
